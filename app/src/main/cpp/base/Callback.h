@@ -20,11 +20,12 @@
 
 namespace SambaClient {
 
-template<typename... Ts>
-class Callback {
- public:
-  virtual int operator()(Ts... args) const = 0;
-};
+  template<typename ... Ts>
+    class Callback {
+    public:
+      virtual int
+      operator() (Ts ... args) const = 0;
+    };
 
 }
 

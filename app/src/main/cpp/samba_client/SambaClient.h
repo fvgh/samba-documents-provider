@@ -27,52 +27,67 @@
 
 namespace SambaClient {
 
-struct CredentialCache;
+  struct CredentialCache;
 
-class SambaClient {
- public:
-  ~SambaClient();
+  class SambaClient {
+  public:
+    ~SambaClient ();
 
-  bool Init(const bool debug, const CredentialCache *credentialCache);
+    bool
+    Init (const bool debug, const CredentialCache *credentialCache);
 
-  int OpenDir(const char *url);
+    int
+    OpenDir (const char *url);
 
-  int ReadDir(const int dh, const struct smbc_dirent** dirent);
+    int
+    ReadDir (const int dh, const struct smbc_dirent** dirent);
 
-  int CloseDir(const int dh);
+    int
+    CloseDir (const int dh);
 
-  int Stat(const char *url, struct stat *st);
+    int
+    Stat (const char *url, struct stat *st);
 
-  int Fstat(const int fd, struct stat * const st);
+    int
+    Fstat (const int fd, struct stat * const st);
 
-  int CreateFile(const char *url);
+    int
+    CreateFile (const char *url);
 
-  int Mkdir(const char *url);
+    int
+    Mkdir (const char *url);
 
-  int Rename(const char *url, const char *nurl);
+    int
+    Rename (const char *url, const char *nurl);
 
-  int Unlink(const char *url);
+    int
+    Unlink (const char *url);
 
-  int Rmdir(const char *url);
+    int
+    Rmdir (const char *url);
 
-  int OpenFile(const char *url, const int flag, const mode_t mode);
+    int
+    OpenFile (const char *url, const int flag, const mode_t mode);
 
-  ssize_t ReadFile(const int fd, void *buffer, const size_t maxlen);
+    ssize_t
+    ReadFile (const int fd, void *buffer, const size_t maxlen);
 
-  ssize_t WriteFile(const int fd, void *buffer, const size_t length);
+    ssize_t
+    WriteFile (const int fd, void *buffer, const size_t length);
 
-  off_t SeekFile(const int fd, const off_t offset, const int whence);
+    off_t
+    SeekFile (const int fd, const off_t offset, const int whence);
 
-  int CloseFile(const int fd);
- private:
-  ::SMBCCTX *sambaContext = NULL;
+    int
+    CloseFile (const int fd);
+  private:
+    ::SMBCCTX *sambaContext = NULL;
 
-  static void GetAuthData(const char *server,
-                   const char *share,
-                   char *workgroup, int maxLenWorkgroup,
-                   char *username, int maxLenUsername,
-                   char *password, int maxLenPassword);
-};
+    static void
+    GetAuthData (const char *server, const char *share, char *workgroup,
+                 int maxLenWorkgroup, char *username, int maxLenUsername,
+                 char *password, int maxLenPassword);
+  };
 
 }
 

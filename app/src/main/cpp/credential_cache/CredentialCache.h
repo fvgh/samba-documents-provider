@@ -21,20 +21,23 @@
 #include <unordered_map>
 
 namespace SambaClient {
-struct CredentialTuple {
-  std::string workgroup;
-  std::string username;
-  std::string password;
-};
+  struct CredentialTuple {
+    std::string workgroup;
+    std::string username;
+    std::string password;
+  };
 
-class CredentialCache {
- public:
-  struct CredentialTuple get(const std::string &key) const;
-  void put(const char *key, const struct CredentialTuple &tuple);
-  void remove(const char *key);
- private:
-  std::unordered_map<std::string, CredentialTuple> credentialMap_;
-};
+  class CredentialCache {
+  public:
+    struct CredentialTuple
+    get (const std::string &key) const;
+    void
+    put (const char *key, const struct CredentialTuple &tuple);
+    void
+    remove (const char *key);
+  private:
+    std::unordered_map<std::string, CredentialTuple> credentialMap_;
+  };
 }
 
 #endif //SAMBADOCUMENTSPROVIDER_SERVERCACHE_H

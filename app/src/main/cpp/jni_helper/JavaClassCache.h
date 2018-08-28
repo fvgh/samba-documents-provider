@@ -22,12 +22,13 @@
 #include <jni.h>
 
 namespace SambaClient {
-class JavaClassCache {
- public:
-  jclass get(JNIEnv *env, const char *name);
- private:
-  std::unordered_map<std::string, jclass> cache_;
-};
+  class JavaClassCache {
+  public:
+    jclass
+    get (JNIEnv *env, const char *name);
+  private:
+    std::unordered_map<std::string, jclass> cache_;
+  };
 }
 
 #endif //SAMBADOCUMENTSPROVIDER_JAVACLASSCACHE_H
