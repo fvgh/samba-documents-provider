@@ -51,4 +51,9 @@ spotless {
     importOrderFile   '../gradle/code-style/android.importorder'
     eclipse().configFile '../gradle/code-style/android-formatting.xml'
   }
+  cpp {
+    licenseHeaderFile '../gradle/code-style/licenseHeader.txt'
+    eclipse().configFile '../gradle/code-style/android-formatting-cpp.xml'
+    paddedCell()
+  }
 }
