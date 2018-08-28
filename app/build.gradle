@@ -23,29 +23,15 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
 
-            externalNativeBuild {
-                cmake {
-                    cppFlags ""
-                }
-            }
-
+            externalNativeBuild { cmake { cppFlags "" } }
         }
         debug {
             jniDebuggable true
 
-            externalNativeBuild {
-                cmake {
-                    cppFlags "-DDEBUG"
-                }
-            }
-
+            externalNativeBuild { cmake { cppFlags "-DDEBUG" } }
         }
     }
-    externalNativeBuild {
-        cmake {
-            path "CMakeLists.txt"
-        }
-    }
+    externalNativeBuild { cmake { path "CMakeLists.txt" } }
 }
 
 dependencies {

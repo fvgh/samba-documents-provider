@@ -2,7 +2,7 @@
 
 buildscript {
     repositories {
-	mavenLocal()
+        mavenLocal()
         jcenter()
     }
     dependencies {
@@ -14,19 +14,17 @@ buildscript {
 allprojects {
     repositories {
         jcenter()
-        maven {
-            url "https://maven.google.com"
-        }
+        maven { url "https://maven.google.com" }
     }
     apply plugin: 'com.diffplug.gradle.spotless'
 }
 
-clean << {
-    delete rootProject.buildDir
-}
+clean << { delete rootProject.buildDir }
 
 spotless {
-	groovyGradle {
-		greclipse().configFile('gradle/code-style/android-formatting.xml', 'gradle/code-style/groovy.prefs')
-	}
+    groovyGradle {
+        target fileTree('.') { include '**/*.gradle' }
+        paddedCell()
+        greclipse().configFile('gradle/code-style/android-formatting.xml', 'gradle/code-style/groovy.prefs')
+    }
 }
