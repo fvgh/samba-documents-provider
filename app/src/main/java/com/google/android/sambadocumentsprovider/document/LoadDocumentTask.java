@@ -18,6 +18,7 @@
 package com.google.android.sambadocumentsprovider.document;
 
 import android.net.Uri;
+
 import com.google.android.sambadocumentsprovider.base.BiResultTask;
 import com.google.android.sambadocumentsprovider.base.OnTaskFinishedCallback;
 import com.google.android.sambadocumentsprovider.cache.DocumentCache;

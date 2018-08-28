@@ -20,8 +20,8 @@ package com.google.android.sambadocumentsprovider.nativefacade;
 import android.annotation.TargetApi;
 import android.os.ParcelFileDescriptor;
 import android.os.storage.StorageManager;
-
 import android.support.annotation.Nullable;
+
 import com.google.android.sambadocumentsprovider.base.OnTaskFinishedCallback;
 import com.google.android.sambadocumentsprovider.provider.ByteBufferPool;
 
@@ -31,9 +31,9 @@ public interface SmbFacade extends SmbClient {
 
   @TargetApi(26)
   ParcelFileDescriptor openProxyFile(
-          String uri,
-          String mode,
-          StorageManager storageManager,
-          ByteBufferPool bufferPool,
-          @Nullable OnTaskFinishedCallback<String> callback) throws IOException;
+      String uri,
+      String mode,
+      StorageManager storageManager,
+      ByteBufferPool bufferPool,
+      @Nullable OnTaskFinishedCallback<String> callback) throws IOException;
 }

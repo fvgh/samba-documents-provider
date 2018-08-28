@@ -47,8 +47,8 @@ public class EncryptionManager {
   private static final String KEYSTORE_PROVIDER = "AndroidKeyStore";
   private static final String KEY_ALIAS = "SambaEncryptionKey";
   private static final String AES_CIPHER = KeyProperties.KEY_ALGORITHM_AES + "/" +
-          KeyProperties.BLOCK_MODE_GCM + "/" +
-          KeyProperties.ENCRYPTION_PADDING_NONE;
+      KeyProperties.BLOCK_MODE_GCM + "/" +
+      KeyProperties.ENCRYPTION_PADDING_NONE;
   private static final int GCM_TAG_LENGTH = 128;
   private static final int IV_LENGTH = 12;
   private static final String DEFAULT_CHARSET = "UTF-8";
@@ -70,8 +70,8 @@ public class EncryptionManager {
     try {
       Cipher cipher = Cipher.getInstance(AES_CIPHER);
       cipher.init(
-              Cipher.ENCRYPT_MODE, mKey.getKey(),
-              new GCMParameterSpec(GCM_TAG_LENGTH, mKey.getIv()));
+          Cipher.ENCRYPT_MODE, mKey.getKey(),
+          new GCMParameterSpec(GCM_TAG_LENGTH, mKey.getIv()));
 
       byte[] encrypted = cipher.doFinal(data.getBytes(Charset.forName(DEFAULT_CHARSET)));
 
@@ -85,8 +85,8 @@ public class EncryptionManager {
     try {
       Cipher cipher = Cipher.getInstance(AES_CIPHER);
       cipher.init(
-              Cipher.DECRYPT_MODE, mKey.getKey(),
-              new GCMParameterSpec(GCM_TAG_LENGTH, mKey.getIv()));
+          Cipher.DECRYPT_MODE, mKey.getKey(),
+          new GCMParameterSpec(GCM_TAG_LENGTH, mKey.getIv()));
 
       byte[] decrypted = cipher.doFinal(Base64.decode(data, Base64.DEFAULT));
       return new String(decrypted, Charset.forName(DEFAULT_CHARSET));
@@ -106,10 +106,10 @@ public class EncryptionManager {
       }
 
       keyGen = KeyGenerator.getInstance(
-              KeyProperties.KEY_ALGORITHM_AES, KEYSTORE_PROVIDER);
+          KeyProperties.KEY_ALGORITHM_AES, KEYSTORE_PROVIDER);
 
       KeyGenParameterSpec spec = new KeyGenParameterSpec.Builder(
-              KEY_ALIAS, KeyProperties.PURPOSE_ENCRYPT | KeyProperties.PURPOSE_DECRYPT)
+          KEY_ALIAS, KeyProperties.PURPOSE_ENCRYPT | KeyProperties.PURPOSE_DECRYPT)
               .setBlockModes(KeyProperties.BLOCK_MODE_GCM)
               .setEncryptionPaddings(KeyProperties.ENCRYPTION_PADDING_NONE)
               .setRandomizedEncryptionRequired(false)

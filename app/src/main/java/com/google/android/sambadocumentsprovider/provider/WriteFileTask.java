@@ -23,9 +23,11 @@ import android.os.ParcelFileDescriptor;
 import android.os.ParcelFileDescriptor.AutoCloseInputStream;
 import android.support.annotation.Nullable;
 import android.util.Log;
+
 import com.google.android.sambadocumentsprovider.base.OnTaskFinishedCallback;
-import com.google.android.sambadocumentsprovider.nativefacade.SmbFile;
 import com.google.android.sambadocumentsprovider.nativefacade.SmbClient;
+import com.google.android.sambadocumentsprovider.nativefacade.SmbFile;
+
 import java.io.IOException;
 import java.nio.ByteBuffer;
 
@@ -57,7 +59,7 @@ public class WriteFileTask extends AsyncTask<Void, Void, Void> {
   @Override
   public Void doInBackground(Void... args) {
     try (final AutoCloseInputStream is = new AutoCloseInputStream(mPfd);
-        final SmbFile file = mClient.openFile(mUri, "w")){
+        final SmbFile file = mClient.openFile(mUri, "w")) {
       int size;
       byte[] buf = new byte[mBuffer.capacity()];
       while ((size = is.read(buf)) > 0) {

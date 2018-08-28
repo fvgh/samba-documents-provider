@@ -22,15 +22,15 @@ import android.os.ProxyFileDescriptorCallback;
 import android.os.storage.StorageManager;
 import android.system.ErrnoException;
 import android.system.StructStat;
+
 import com.google.android.sambadocumentsprovider.BuildConfig;
 import com.google.android.sambadocumentsprovider.base.DirectoryEntry;
+
 import java.io.IOException;
 import java.util.List;
 
 /**
- * Java facade for libsmbclient native library.
- *
- * This class is not thread safe.
+ * Java facade for libsmbclient native library. This class is not thread safe.
  */
 class NativeSambaFacade implements SmbClient {
 
@@ -82,7 +82,7 @@ class NativeSambaFacade implements SmbClient {
     try {
       checkNativeHandler();
       createFile(mNativeHandler, uri);
-    } catch(ErrnoException e) {
+    } catch (ErrnoException e) {
       throw new IOException("Failed to create file at " + uri, e);
     }
   }
@@ -92,7 +92,7 @@ class NativeSambaFacade implements SmbClient {
     try {
       checkNativeHandler();
       mkdir(mNativeHandler, uri);
-    } catch(ErrnoException e) {
+    } catch (ErrnoException e) {
       throw new IOException("Failed to make directory at " + uri, e);
     }
   }
@@ -102,7 +102,7 @@ class NativeSambaFacade implements SmbClient {
     try {
       checkNativeHandler();
       rename(mNativeHandler, uri, newUri);
-    } catch(ErrnoException e) {
+    } catch (ErrnoException e) {
       throw new IOException("Failed to rename " + uri + " to " + newUri, e);
     }
   }
@@ -112,7 +112,7 @@ class NativeSambaFacade implements SmbClient {
     try {
       checkNativeHandler();
       unlink(mNativeHandler, uri);
-    } catch(ErrnoException e) {
+    } catch (ErrnoException e) {
       throw new IOException("Failed to unlink " + uri, e);
     }
   }
@@ -122,7 +122,7 @@ class NativeSambaFacade implements SmbClient {
     try {
       checkNativeHandler();
       rmdir(mNativeHandler, uri);
-    } catch(ErrnoException e) {
+    } catch (ErrnoException e) {
       throw new IOException("Failed to rmdir " + uri, e);
     }
   }
@@ -132,7 +132,7 @@ class NativeSambaFacade implements SmbClient {
     try {
       checkNativeHandler();
       return new SambaFile(mNativeHandler, openFile(mNativeHandler, uri, mode));
-    } catch(ErrnoException e) {
+    } catch (ErrnoException e) {
       throw new IOException("Failed to open " + uri, e);
     }
   }

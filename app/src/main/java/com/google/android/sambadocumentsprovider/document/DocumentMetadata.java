@@ -30,6 +30,7 @@ import com.google.android.sambadocumentsprovider.R;
 import com.google.android.sambadocumentsprovider.base.DirectoryEntry;
 import com.google.android.sambadocumentsprovider.nativefacade.SmbClient;
 import com.google.android.sambadocumentsprovider.nativefacade.SmbDir;
+
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -38,11 +39,9 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;
 
 /**
- * This is a snapshot of the metadata of a seen document. It contains its SMB URI, display name,
- * access/create/modified time, size, its children etc sometime in the past. It also contains
- * the last exception thrown when querying its children.
- *
- * The metadata inside this class may be fetched at different time due to Samba client API.
+ * This is a snapshot of the metadata of a seen document. It contains its SMB URI, display name, access/create/modified
+ * time, size, its children etc sometime in the past. It also contains the last exception thrown when querying its
+ * children. The metadata inside this class may be fetched at different time due to Samba client API.
  */
 public class DocumentMetadata {
 
@@ -210,6 +209,7 @@ public class DocumentMetadata {
 
   /**
    * Gets children of this document.
+   * 
    * @return the list of children or {@code null} if it's not fetched yet.
    */
   public @Nullable Map<Uri, DocumentMetadata> getChildren() {
@@ -321,15 +321,15 @@ public class DocumentMetadata {
     }
 
     final StructStat stat = client.stat(uri.toString());
-      final DirectoryEntry entry = new DirectoryEntry(
-          OsConstants.S_ISDIR(stat.st_mode) ? DirectoryEntry.DIR : DirectoryEntry.FILE,
-          "",
-          uri.getLastPathSegment());
-      final DocumentMetadata metadata = new DocumentMetadata(uri, entry);
-      metadata.mStat.set(stat);
+    final DirectoryEntry entry = new DirectoryEntry(
+        OsConstants.S_ISDIR(stat.st_mode) ? DirectoryEntry.DIR : DirectoryEntry.FILE,
+        "",
+        uri.getLastPathSegment());
+    final DocumentMetadata metadata = new DocumentMetadata(uri, entry);
+    metadata.mStat.set(stat);
 
-      return metadata;
-    }
+    return metadata;
+  }
 
   public static DocumentMetadata createShare(String host, String share) {
     final Uri uri = SMB_BASE_URI.buildUpon().authority(host).encodedPath(share).build();
@@ -345,8 +345,7 @@ public class DocumentMetadata {
   }
 
   private static DocumentMetadata create(Uri uri, @DirectoryEntry.Type int type) {
-    final DirectoryEntry entry =
-            new DirectoryEntry(type, "", uri.getLastPathSegment());
+    final DirectoryEntry entry = new DirectoryEntry(type, "", uri.getLastPathSegment());
     return new DocumentMetadata(uri, entry);
   }
 }

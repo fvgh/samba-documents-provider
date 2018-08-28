@@ -43,9 +43,7 @@ class BroadcastUtils {
   private static final String SERVER_NAME_CHARSET = "US-ASCII";
 
   /**
-   * Generates a NetBIOS name query request.
-   * https://tools.ietf.org/html/rfc1002
-   * Section 4.2.12
+   * Generates a NetBIOS name query request. https://tools.ietf.org/html/rfc1002 Section 4.2.12
    */
   static byte[] createPacket(int transId) {
     ByteBuffer os = ByteBuffer.allocate(50);
@@ -88,9 +86,7 @@ class BroadcastUtils {
   }
 
   /**
-   * Parses a positive response to NetBIOS name request query.
-   * https://tools.ietf.org/html/rfc1002
-   * Section 4.2.13
+   * Parses a positive response to NetBIOS name request query. https://tools.ietf.org/html/rfc1002 Section 4.2.13
    */
   static List<String> extractServers(byte[] data, int expectedTransId) throws BrowsingException {
     try {
@@ -100,7 +96,8 @@ class BroadcastUtils {
       if (transId != expectedTransId) {
         // This response is not to our broadcast.
 
-        if (BuildConfig.DEBUG) Log.d(TAG, "Irrelevant broadcast response");
+        if (BuildConfig.DEBUG)
+          Log.d(TAG, "Irrelevant broadcast response");
 
         return Collections.emptyList();
       }
@@ -162,8 +159,7 @@ class BroadcastUtils {
         continue;
       }
 
-      for (InterfaceAddress interfaceAddress :
-              networkInterface.getInterfaceAddresses()) {
+      for (InterfaceAddress interfaceAddress : networkInterface.getInterfaceAddresses()) {
         InetAddress broadcast = interfaceAddress.getBroadcast();
 
         if (broadcast != null) {

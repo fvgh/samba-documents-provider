@@ -28,6 +28,7 @@ import android.util.Log;
 import com.google.android.sambadocumentsprovider.encryption.EncryptionException;
 import com.google.android.sambadocumentsprovider.encryption.EncryptionManager;
 import com.google.android.sambadocumentsprovider.nativefacade.CredentialCache;
+
 import java.io.IOException;
 import java.io.StringReader;
 import java.io.StringWriter;
@@ -71,8 +72,8 @@ public class ShareManager implements Iterable<String> {
 
     mPref = context.getSharedPreferences(SERVER_CACHE_PREF_KEY, Context.MODE_PRIVATE);
     // Loading saved servers.
-    final Set<String> serverStringSet =
-        mPref.getStringSet(SERVER_STRING_SET_KEY, Collections.<String> emptySet());
+    final Set<String> serverStringSet = mPref.getStringSet(SERVER_STRING_SET_KEY,
+        Collections.<String> emptySet());
 
     final Map<String, ShareTuple> shareMap = new HashMap<>(serverStringSet.size());
     final List<String> forceEncryption = new ArrayList<>();
@@ -109,12 +110,12 @@ public class ShareManager implements Iterable<String> {
   }
 
   /**
-   * Save the server and credentials to permanent storage.
-   * Throw an exception if a server with such a uri is already present.
+   * Save the server and credentials to permanent storage. Throw an exception if a server with such a uri is already
+   * present.
    */
   public synchronized void addServer(
-          String uri, String workgroup, String username, String password,
-          ShareMountChecker checker, boolean mount) throws IOException {
+      String uri, String workgroup, String username, String password,
+      ShareMountChecker checker, boolean mount) throws IOException {
 
     if (mMountedServerSet.contains(uri)) {
       throw new IllegalStateException("Uri " + uri + " is already stored.");
@@ -127,27 +128,27 @@ public class ShareManager implements Iterable<String> {
    * Update the server info. If a server with such a uri doesn't exist, create it.
    */
   public synchronized void addOrUpdateServer(
-          String uri, String workgroup, String username, String password,
-          ShareMountChecker checker, boolean mount) throws IOException {
+      String uri, String workgroup, String username, String password,
+      ShareMountChecker checker, boolean mount) throws IOException {
     saveServerInfo(uri, workgroup, username, password, checker, mount);
   }
 
   private void saveServerInfo(
-          String uri, String workgroup, String username, String password,
-          ShareMountChecker checker, boolean mount) throws IOException {
+      String uri, String workgroup, String username, String password,
+      ShareMountChecker checker, boolean mount) throws IOException {
 
     checkServerCredentials(uri, workgroup, username, password, checker);
 
     final boolean hasPassword = !TextUtils.isEmpty(username) && !TextUtils.isEmpty(password);
     final ShareTuple tuple = hasPassword
-            ? new ShareTuple(workgroup, username, password, mount)
-            : ShareTuple.EMPTY_TUPLE;
+        ? new ShareTuple(workgroup, username, password, mount)
+        : ShareTuple.EMPTY_TUPLE;
 
     updateServersData(uri, tuple, mount);
   }
 
   private void updateServersData(
-          String uri, ShareTuple tuple, boolean shouldNotify) {
+      String uri, ShareTuple tuple, boolean shouldNotify) {
     final String serverString = encode(uri, tuple);
     if (serverString == null) {
       throw new IllegalStateException("Failed to encode credential tuple.");

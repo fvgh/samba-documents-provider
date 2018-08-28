@@ -18,7 +18,9 @@
 package com.google.android.sambadocumentsprovider.nativefacade;
 
 import android.system.StructStat;
+
 import com.google.android.sambadocumentsprovider.base.DirectoryEntry;
+
 import java.io.IOException;
 import java.util.List;
 

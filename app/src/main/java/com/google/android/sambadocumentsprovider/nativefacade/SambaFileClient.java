@@ -30,9 +30,13 @@ import java.nio.ByteBuffer;
 
 class SambaFileClient extends BaseClient implements SmbFile {
 
-  @IntDef({ READ, WRITE, CLOSE })
+  @IntDef({
+      READ, WRITE, CLOSE
+  })
   @Retention(RetentionPolicy.SOURCE)
-  @interface Operation {}
+  @interface Operation {
+  }
+
   private static final int READ = 1;
   private static final int WRITE = 2;
   private static final int CLOSE = 3;
@@ -45,7 +49,7 @@ class SambaFileClient extends BaseClient implements SmbFile {
 
   @Override
   public int read(ByteBuffer buffer, int maxLen) throws IOException {
-    try(final MessageValues<ByteBuffer> messageValues = MessageValues.obtain()) {
+    try (final MessageValues<ByteBuffer> messageValues = MessageValues.obtain()) {
       messageValues.setInt(maxLen);
       messageValues.setObj(buffer);
       final Message msg = mHandler.obtainMessage(READ, messageValues);

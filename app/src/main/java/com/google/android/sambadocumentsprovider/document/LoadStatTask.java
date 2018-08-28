@@ -21,8 +21,10 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.system.StructStat;
 import android.util.Log;
+
 import com.google.android.sambadocumentsprovider.base.OnTaskFinishedCallback;
 import com.google.android.sambadocumentsprovider.nativefacade.SmbClient;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -52,7 +54,7 @@ public class LoadStatTask extends AsyncTask<Void, Void, Map<Uri, StructStat>> {
         if (isCancelled()) {
           return stats;
         }
-      } catch(Exception e) {
+      } catch (Exception e) {
         // Failed to load a stat for a child... Just eat this exception, the only consequence it may
         // have is constantly retrying to fetch the stat.
         Log.e(TAG, "Failed to load stat for " + metadata.getUri());

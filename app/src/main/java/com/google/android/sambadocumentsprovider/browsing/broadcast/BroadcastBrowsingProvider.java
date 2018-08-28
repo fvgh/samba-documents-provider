@@ -92,15 +92,16 @@ public class BroadcastBrowsingProvider implements NetworkBrowsingProvider {
     }
 
     private void sendNameQueryBroadcast(
-            DatagramSocket socket,
-            InetAddress address) throws IOException {
+        DatagramSocket socket,
+        InetAddress address) throws IOException {
       byte[] data = BroadcastUtils.createPacket(mTransId);
       int dataLength = data.length;
 
       DatagramPacket packet = new DatagramPacket(data, 0, dataLength, address, NBT_PORT);
       socket.send(packet);
 
-      if (BuildConfig.DEBUG) Log.d(TAG, "Broadcast package sent");
+      if (BuildConfig.DEBUG)
+        Log.d(TAG, "Broadcast package sent");
     }
 
     private List<String> listenForServers(DatagramSocket socket) throws IOException {

@@ -41,8 +41,8 @@ class AuthorizationTask extends BiResultTask<Void, Void, Void> {
   private final OnTaskFinishedCallback<Void> mCallback;
 
   AuthorizationTask(String uri, String user, String password, String domain, boolean shouldPin,
-                    ShareManager shareManager, SmbClient client,
-                    OnTaskFinishedCallback<Void> callback) {
+      ShareManager shareManager, SmbClient client,
+      OnTaskFinishedCallback<Void> callback) {
     mUri = uri;
     mUser = user;
     mPassword = password;

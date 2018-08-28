@@ -20,7 +20,9 @@ package com.google.android.sambadocumentsprovider;
 import android.support.annotation.Nullable;
 import android.system.ErrnoException;
 import android.util.Log;
+
 import com.google.android.sambadocumentsprovider.base.BiResultTask;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -97,8 +99,9 @@ class SambaConfiguration implements Iterable<Map.Entry<String, String>> {
     final File extSmbFile = getExtSmbFile(mShareFolder);
 
     if (extSmbFile.isFile() && extSmbFile.lastModified() > smbFile.lastModified()) {
-      if (BuildConfig.DEBUG) Log.d(TAG, "Syncing " + SMB_CONF_FILE +
-          " from external source to internal source.");
+      if (BuildConfig.DEBUG)
+        Log.d(TAG, "Syncing " + SMB_CONF_FILE +
+            " from external source to internal source.");
       new SyncTask(listener).execute(extSmbFile);
 
       return true;
@@ -153,7 +156,7 @@ class SambaConfiguration implements Iterable<Map.Entry<String, String>> {
   private void setHomeEnv(String absoluteFolder) {
     try {
       setEnv(HOME_VAR, absoluteFolder);
-    } catch(ErrnoException e) {
+    } catch (ErrnoException e) {
       Log.e(TAG, "Failed to set HOME environment variable.", e);
     }
   }

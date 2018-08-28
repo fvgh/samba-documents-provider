@@ -58,7 +58,7 @@ public class SambaMessageLooper {
       mCredentialCacheClient = new CredentialCacheClient(mLooper, mCredentialCacheImpl);
 
       mServiceClient = new SambaFacadeClient(mLooper, mClientImpl);
-    } catch(InterruptedException e) {
+    } catch (InterruptedException e) {
       // Should never happen
       throw new RuntimeException(e);
     }

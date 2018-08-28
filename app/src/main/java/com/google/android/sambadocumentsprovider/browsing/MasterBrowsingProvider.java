@@ -44,8 +44,8 @@ class MasterBrowsingProvider implements NetworkBrowsingProvider {
       List<DirectoryEntry> workgroups = getDirectoryChildren(rootDir);
       for (DirectoryEntry workgroup : workgroups) {
         if (workgroup.getType() == DirectoryEntry.WORKGROUP) {
-          List<DirectoryEntry> servers = getDirectoryChildren
-                  (mClient.openDir(MASTER_BROWSING_DIR + workgroup.getName()));
+          List<DirectoryEntry> servers = getDirectoryChildren(
+              mClient.openDir(MASTER_BROWSING_DIR + workgroup.getName()));
 
           for (DirectoryEntry server : servers) {
             if (server.getType() == DirectoryEntry.SERVER) {

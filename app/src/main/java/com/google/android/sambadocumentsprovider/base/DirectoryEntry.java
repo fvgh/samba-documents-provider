@@ -18,18 +18,23 @@
 package com.google.android.sambadocumentsprovider.base;
 
 import android.support.annotation.IntDef;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 /**
- * Denotes a directory entry in Samba. This can represent not only a directory in Samba, but also
- * a workgroup, a share or a file.
+ * Denotes a directory entry in Samba. This can represent not only a directory in Samba, but also a workgroup, a share
+ * or a file.
  */
 public class DirectoryEntry {
 
-  @IntDef({WORKGROUP, SERVER, FILE_SHARE, PRINTER_SHARE, COMMS_SHARE, IPC_SHARE, DIR, FILE, LINK})
+  @IntDef({
+      WORKGROUP, SERVER, FILE_SHARE, PRINTER_SHARE, COMMS_SHARE, IPC_SHARE, DIR, FILE, LINK
+  })
   @Retention(RetentionPolicy.SOURCE)
-  public @interface Type {}
+  public @interface Type {
+  }
+
   public static final int WORKGROUP = 1;
   public static final int SERVER = 2;
   public static final int FILE_SHARE = 3;

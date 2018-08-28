@@ -19,6 +19,7 @@ package com.google.android.sambadocumentsprovider.mount;
 
 import android.net.Uri;
 import android.util.Log;
+
 import com.google.android.sambadocumentsprovider.ShareManager;
 import com.google.android.sambadocumentsprovider.ShareManager.ShareMountChecker;
 import com.google.android.sambadocumentsprovider.base.BiResultTask;
@@ -26,6 +27,7 @@ import com.google.android.sambadocumentsprovider.base.OnTaskFinishedCallback;
 import com.google.android.sambadocumentsprovider.cache.DocumentCache;
 import com.google.android.sambadocumentsprovider.document.DocumentMetadata;
 import com.google.android.sambadocumentsprovider.nativefacade.SmbClient;
+
 import java.io.IOException;
 import java.util.Map;
 
@@ -45,7 +47,7 @@ class MountServerTask extends BiResultTask<Void, Void, Void> {
   private final ShareMountChecker mChecker = new ShareMountChecker() {
     @Override
     public void checkShareMounting() throws IOException {
-        mMetadata.loadChildren(mClient);
+      mMetadata.loadChildren(mClient);
     }
   };
 

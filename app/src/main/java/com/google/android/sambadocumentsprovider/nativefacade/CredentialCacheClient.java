@@ -21,14 +21,19 @@ import android.os.Bundle;
 import android.os.Looper;
 import android.os.Message;
 import android.support.annotation.IntDef;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 class CredentialCacheClient extends BaseClient implements CredentialCache {
 
-  @IntDef( {PUT_CREDENTIAL, REMOVE_CREDENTIAL })
+  @IntDef({
+      PUT_CREDENTIAL, REMOVE_CREDENTIAL
+  })
   @Retention(RetentionPolicy.SOURCE)
-  @interface Operation {}
+  @interface Operation {
+  }
+
   private static final int PUT_CREDENTIAL = 1;
   private static final int REMOVE_CREDENTIAL = 2;
 
@@ -71,6 +76,7 @@ class CredentialCacheClient extends BaseClient implements CredentialCache {
   private static class CredentialCacheHandler extends BaseHandler {
 
     private CredentialCache mCredentialCacheImpl;
+
     private CredentialCacheHandler(Looper looper, CredentialCache credentialCacheImpl) {
       super(looper);
       mCredentialCacheImpl = credentialCacheImpl;

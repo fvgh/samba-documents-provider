@@ -37,11 +37,11 @@ class SambaFile implements SmbFile {
 
   public int read(ByteBuffer buffer, int maxLen) throws IOException {
     try {
-      final int bytesRead =
-          read(mNativeHandler, mNativeFd, buffer, Math.min(maxLen, buffer.capacity()));
+      final int bytesRead = read(mNativeHandler, mNativeFd, buffer,
+          Math.min(maxLen, buffer.capacity()));
       mOffset += bytesRead;
       return bytesRead;
-    } catch(ErrnoException e) {
+    } catch (ErrnoException e) {
       throw new IOException("Failed to read file. Fd: " + mNativeFd, e);
     }
   }
@@ -51,7 +51,7 @@ class SambaFile implements SmbFile {
       final int bytesWritten = write(mNativeHandler, mNativeFd, buffer, length);
       mOffset += bytesWritten;
       return bytesWritten;
-    } catch(ErrnoException e) {
+    } catch (ErrnoException e) {
       throw new IOException("Failed to write file. Fd: " + mNativeFd, e);
     }
   }
@@ -84,7 +84,7 @@ class SambaFile implements SmbFile {
       int fd = mNativeFd;
       mNativeFd = -1;
       close(mNativeHandler, fd);
-    } catch(ErrnoException e) {
+    } catch (ErrnoException e) {
       throw new IOException("Failed to close file. Fd: " + mNativeFd, e);
     }
   }

@@ -22,16 +22,22 @@ import android.os.Looper;
 import android.os.Message;
 import android.support.annotation.IntDef;
 import android.support.annotation.Nullable;
+
 import com.google.android.sambadocumentsprovider.base.DirectoryEntry;
+
 import java.io.IOException;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 class SambaDirClient extends BaseClient implements SmbDir {
 
-  @IntDef({ READ_DIR, CLOSE })
+  @IntDef({
+      READ_DIR, CLOSE
+  })
   @Retention(RetentionPolicy.SOURCE)
-  @interface Operation {}
+  @interface Operation {
+  }
+
   private static final int READ_DIR = 0;
   private static final int CLOSE = READ_DIR + 1;
 

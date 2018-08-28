@@ -31,7 +31,7 @@ abstract class BaseClient {
         mHandler.sendMessage(msg);
         msg.obj.wait();
       }
-    } catch(InterruptedException e) {
+    } catch (InterruptedException e) {
       // It should never happen.
       throw new RuntimeException("Unexpected interruption.", e);
     }

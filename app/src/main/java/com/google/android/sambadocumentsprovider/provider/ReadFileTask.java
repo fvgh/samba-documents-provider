@@ -23,8 +23,10 @@ import android.os.ParcelFileDescriptor;
 import android.os.ParcelFileDescriptor.AutoCloseOutputStream;
 import android.support.annotation.Nullable;
 import android.util.Log;
-import com.google.android.sambadocumentsprovider.nativefacade.SmbFile;
+
 import com.google.android.sambadocumentsprovider.nativefacade.SmbClient;
+import com.google.android.sambadocumentsprovider.nativefacade.SmbFile;
+
 import java.io.IOException;
 import java.nio.ByteBuffer;
 

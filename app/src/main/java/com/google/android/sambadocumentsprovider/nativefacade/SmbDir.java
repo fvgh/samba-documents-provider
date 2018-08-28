@@ -18,12 +18,15 @@
 package com.google.android.sambadocumentsprovider.nativefacade;
 
 import android.support.annotation.Nullable;
+
 import com.google.android.sambadocumentsprovider.base.DirectoryEntry;
+
 import java.io.Closeable;
 import java.io.IOException;
 
 public interface SmbDir extends Closeable {
 
-  @Nullable DirectoryEntry readDir() throws IOException;
+  @Nullable
+  DirectoryEntry readDir() throws IOException;
 
 }

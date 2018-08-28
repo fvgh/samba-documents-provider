@@ -19,12 +19,12 @@ package com.google.android.sambadocumentsprovider.nativefacade;
 
 import android.support.v4.util.Pools.Pool;
 import android.support.v4.util.Pools.SynchronizedPool;
+
 import java.io.IOException;
 
 /**
- * A class used for pass values between two sides of {@link SambaMessageLooper}.
- *
- * If it were C/C++, this would be a union type.
+ * A class used for pass values between two sides of {@link SambaMessageLooper}. If it were C/C++, this would be a union
+ * type.
  *
  * @param <T> A convenient parameterized type to avoid casting everywhere.
  */

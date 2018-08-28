@@ -36,9 +36,13 @@ import java.util.List;
 public abstract class SectionedAdapter extends BaseAdapter {
   private static final String TAG = "SectionedAdapter";
 
-  @IntDef({SECTION_HEADER, REGULAR_ROW, LOADING_ROW})
+  @IntDef({
+      SECTION_HEADER, REGULAR_ROW, LOADING_ROW
+  })
   @Retention(RetentionPolicy.SOURCE)
-  private @interface Type {}
+  private @interface Type {
+  }
+
   private static final int SECTION_HEADER = 0;
   private static final int REGULAR_ROW = 1;
   private static final int LOADING_ROW = 2;
@@ -54,10 +58,13 @@ public abstract class SectionedAdapter extends BaseAdapter {
   public abstract int getSectionCount();
 
   public abstract String getNameForSection(int sectionIndex);
+
   public abstract int getIconForSection(int sectionIndex);
+
   public abstract int getSizeForSection(int sectionIndex);
 
   public abstract String getNameForRow(int sectionIndex, int rowIndex);
+
   public abstract int getIconForRow(int sectionIndex, int rowIndex);
 
   @Override
@@ -153,11 +160,10 @@ public abstract class SectionedAdapter extends BaseAdapter {
 
   private int addFlatRow(String name, int iconId, boolean isSectionHeader, int position) {
     FlatRow newRow = FlatRow.create(
-            name,
-            iconId,
-            isSectionHeader,
-            position < mFlatRows.size() ? mFlatRows.get(position) : null);
-
+        name,
+        iconId,
+        isSectionHeader,
+        position < mFlatRows.size() ? mFlatRows.get(position) : null);
 
     if (position < mFlatRows.size()) {
       mFlatRows.set(position, newRow);

@@ -24,14 +24,15 @@ import android.net.ConnectivityManager.NetworkCallback;
 import android.net.Network;
 import android.net.NetworkCapabilities;
 import android.net.NetworkRequest;
-
 import android.util.Log;
+
 import com.google.android.sambadocumentsprovider.SambaConfiguration.OnConfigurationChangedListener;
 import com.google.android.sambadocumentsprovider.browsing.NetworkBrowser;
 import com.google.android.sambadocumentsprovider.cache.DocumentCache;
 import com.google.android.sambadocumentsprovider.nativefacade.CredentialCache;
 import com.google.android.sambadocumentsprovider.nativefacade.SambaMessageLooper;
 import com.google.android.sambadocumentsprovider.nativefacade.SmbFacade;
+
 import java.io.File;
 
 public class SambaProviderApplication extends Application {
@@ -89,8 +90,9 @@ public class SambaProviderApplication extends Application {
     // because there are cases where external storage is not ready, and we don't have an external
     // folder at all.
     if (sambaConf.syncFromExternal(listener)) {
-      if (BuildConfig.DEBUG) Log.d(TAG, "Syncing smb.conf from external folder. No need to try "
-          + "flushing default config.");
+      if (BuildConfig.DEBUG)
+        Log.d(TAG, "Syncing smb.conf from external folder. No need to try "
+            + "flushing default config.");
       return;
     }
 
@@ -98,8 +100,8 @@ public class SambaProviderApplication extends Application {
   }
 
   private void registerNetworkCallback(Context context) {
-    final ConnectivityManager manager =
-        (ConnectivityManager) context.getSystemService(CONNECTIVITY_SERVICE);
+    final ConnectivityManager manager = (ConnectivityManager) context
+        .getSystemService(CONNECTIVITY_SERVICE);
     manager.registerNetworkCallback(
         new NetworkRequest.Builder()
             .addTransportType(NetworkCapabilities.TRANSPORT_WIFI)

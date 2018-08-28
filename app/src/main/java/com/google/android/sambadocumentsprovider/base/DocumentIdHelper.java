@@ -18,6 +18,7 @@
 package com.google.android.sambadocumentsprovider.base;
 
 import android.net.Uri;
+
 import com.google.android.sambadocumentsprovider.BuildConfig;
 import com.google.android.sambadocumentsprovider.document.DocumentMetadata;
 

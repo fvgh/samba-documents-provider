@@ -49,7 +49,7 @@ public class BrowsingAutocompleteAdapter extends SectionedAdapter implements Fil
         List<ServerInfo> filteredServers = new ArrayList<>();
 
         if (!query.isEmpty()) {
-          filteredServers.add(new ServerInfo(query, Collections.<String>emptyList()));
+          filteredServers.add(new ServerInfo(query, Collections.<String> emptyList()));
         }
 
         if (!isLoadingData()) {

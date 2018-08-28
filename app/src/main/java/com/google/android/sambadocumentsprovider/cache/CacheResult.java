@@ -23,16 +23,22 @@ import android.support.annotation.Nullable;
 import android.support.v4.util.Pools.Pool;
 import android.support.v4.util.Pools.SimplePool;
 import android.support.v4.util.Pools.SynchronizedPool;
+
 import com.google.android.sambadocumentsprovider.BuildConfig;
 import com.google.android.sambadocumentsprovider.document.DocumentMetadata;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 public class CacheResult implements AutoCloseable {
 
-  @IntDef({CACHE_MISS, CACHE_HIT, CACHE_EXPIRED})
+  @IntDef({
+      CACHE_MISS, CACHE_HIT, CACHE_EXPIRED
+  })
   @Retention(RetentionPolicy.SOURCE)
-  @interface State {}
+  @interface State {
+  }
+
   public static final int CACHE_MISS = 0;
   public static final int CACHE_HIT = 1;
   public static final int CACHE_EXPIRED = 2;
@@ -67,7 +73,8 @@ public class CacheResult implements AutoCloseable {
     mState = CACHE_MISS;
     mItem = null;
     boolean recycled = POOL.release(this);
-    if (BuildConfig.DEBUG && !recycled) throw new IllegalStateException("One item is not enough!");
+    if (BuildConfig.DEBUG && !recycled)
+      throw new IllegalStateException("One item is not enough!");
   }
 
   @Override

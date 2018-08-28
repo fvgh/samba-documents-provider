@@ -41,9 +41,13 @@ import java.util.List;
 
 class SambaFacadeClient extends BaseClient implements SmbFacade {
 
-  @IntDef({ RESET, READ_DIR, STAT, MKDIR, RENAME, UNLINK, RMDIR, OPEN_FILE })
+  @IntDef({
+      RESET, READ_DIR, STAT, MKDIR, RENAME, UNLINK, RMDIR, OPEN_FILE
+  })
   @Retention(RetentionPolicy.SOURCE)
-  @interface Operation {}
+  @interface Operation {
+  }
+
   static final int RESET = 1;
   static final int READ_DIR = RESET + 1;
   static final int STAT = READ_DIR + 1;
@@ -158,9 +162,9 @@ class SambaFacadeClient extends BaseClient implements SmbFacade {
       @Nullable OnTaskFinishedCallback<String> callback) throws IOException {
     SambaFile file = openFileRaw(uri, mode);
     return storageManager.openProxyFileDescriptor(
-            ParcelFileDescriptor.parseMode(mode),
-            new SambaProxyFileCallback(uri, file, bufferPool, callback),
-            mHandler);
+        ParcelFileDescriptor.parseMode(mode),
+        new SambaProxyFileCallback(uri, file, bufferPool, callback),
+        mHandler);
   }
 
   private SambaFile openFileRaw(String uri, String mode) throws IOException {

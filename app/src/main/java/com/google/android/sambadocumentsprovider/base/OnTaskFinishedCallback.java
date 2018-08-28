@@ -19,15 +19,20 @@ package com.google.android.sambadocumentsprovider.base;
 
 import android.support.annotation.IntDef;
 import android.support.annotation.Nullable;
+
 import java.io.IOException;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 public interface OnTaskFinishedCallback<T> {
 
-  @IntDef({ SUCCEEDED, FAILED, CANCELLED })
+  @IntDef({
+      SUCCEEDED, FAILED, CANCELLED
+  })
   @Retention(RetentionPolicy.SOURCE)
-  @interface Status {}
+  @interface Status {
+  }
+
   int SUCCEEDED = 0;
   int FAILED = 1;
   int CANCELLED = 2;

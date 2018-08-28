@@ -25,12 +25,12 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
+import android.os.Bundle;
 import android.provider.DocumentsContract;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
 import android.util.Log;
@@ -47,6 +47,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.google.android.sambadocumentsprovider.R;
 import com.google.android.sambadocumentsprovider.SambaProviderApplication;
 import com.google.android.sambadocumentsprovider.ShareManager;
@@ -73,7 +74,6 @@ public class MountServerActivity extends AppCompatActivity {
   private static final String USERNAME_KEY = "username";
   private static final String PASSWORD_KEY = "password";
   private static final String AUTH_LAUNCH_KEY = "authLaunch";
-
 
   private final OnClickListener mPasswordStateChangeListener = new OnClickListener() {
     @Override
@@ -102,11 +102,11 @@ public class MountServerActivity extends AppCompatActivity {
     }
   };
 
-  private final OnTaskFinishedCallback<Map<String, List<String>>>  mBrowsingCallback
-          = new OnTaskFinishedCallback<Map<String, List<String>>>() {
+  private final OnTaskFinishedCallback<Map<String, List<String>>> mBrowsingCallback = new OnTaskFinishedCallback<Map<String, List<String>>>() {
     @Override
     public void onTaskFinished(
-            @Status int status, @Nullable Map<String, List<String>>  result, @Nullable Exception exception) {
+        @Status int status, @Nullable Map<String, List<String>> result,
+        @Nullable Exception exception) {
 
       for (String server : result.keySet()) {
         mBrowsingAdapter.addServer(server, result.get(server));
@@ -288,8 +288,8 @@ public class MountServerActivity extends AppCompatActivity {
 
     mCache.put(metadata);
 
-    final ProgressDialog dialog =
-        ProgressDialog.show(this, null, getString(R.string.mounting_share), true);
+    final ProgressDialog dialog = ProgressDialog.show(this, null,
+        getString(R.string.mounting_share), true);
     final OnTaskFinishedCallback<Void> callback = new OnTaskFinishedCallback<Void>() {
       @Override
       public void onTaskFinished(@Status int status, @Nullable Void item, Exception exception) {
@@ -382,7 +382,9 @@ public class MountServerActivity extends AppCompatActivity {
         return null;
       }
       final String share = pathSegments.get(0);
-      return new String[] { host, share };
+      return new String[] {
+          host, share
+      };
     }
   }
 

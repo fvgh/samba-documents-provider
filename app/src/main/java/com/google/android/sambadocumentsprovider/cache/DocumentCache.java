@@ -20,6 +20,7 @@ package com.google.android.sambadocumentsprovider.cache;
 import android.net.Uri;
 
 import com.google.android.sambadocumentsprovider.document.DocumentMetadata;
+
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;

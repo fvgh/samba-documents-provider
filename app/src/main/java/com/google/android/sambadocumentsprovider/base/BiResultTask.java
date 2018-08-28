@@ -20,6 +20,7 @@ package com.google.android.sambadocumentsprovider.base;
 import android.os.AsyncTask;
 import android.support.annotation.IntDef;
 import android.support.annotation.Nullable;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -41,6 +42,7 @@ public abstract class BiResultTask<Param, Progress, Result>
   }
 
   public abstract void onSucceeded(Result result);
+
   public void onFailed(Exception exception) {}
 
   @Override

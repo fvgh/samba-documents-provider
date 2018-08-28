@@ -19,7 +19,9 @@ package com.google.android.sambadocumentsprovider.nativefacade;
 
 import android.support.annotation.Nullable;
 import android.system.ErrnoException;
+
 import com.google.android.sambadocumentsprovider.base.DirectoryEntry;
+
 import java.io.IOException;
 
 class SambaDir implements SmbDir {
@@ -41,7 +43,6 @@ class SambaDir implements SmbDir {
     }
   }
 
-
   @Override
   public void close() throws IOException {
     try {
@@ -54,5 +55,6 @@ class SambaDir implements SmbDir {
   }
 
   private native @Nullable DirectoryEntry readDir(long handler, int fd) throws ErrnoException;
+
   private native void close(long handler, int fd) throws ErrnoException;
 }

@@ -18,10 +18,12 @@
 package com.google.android.sambadocumentsprovider.document;
 
 import android.net.Uri;
-import com.google.android.sambadocumentsprovider.cache.DocumentCache;
+
 import com.google.android.sambadocumentsprovider.base.BiResultTask;
 import com.google.android.sambadocumentsprovider.base.OnTaskFinishedCallback;
+import com.google.android.sambadocumentsprovider.cache.DocumentCache;
 import com.google.android.sambadocumentsprovider.nativefacade.SmbClient;
+
 import java.io.IOException;
 import java.util.Map;
 

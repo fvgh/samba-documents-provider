@@ -22,11 +22,11 @@ import android.app.ProgressDialog;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -127,7 +127,7 @@ public class AuthActivity extends AppCompatActivity {
 
   private void tryAuth() {
     progressDialog = ProgressDialog.show(
-            this, null, getResources().getString(R.string.authenticating), true);
+        this, null, getResources().getString(R.string.authenticating), true);
 
     final String username = mUsernameEditText.getText().toString();
     final String password = mPasswordEditText.getText().toString();
@@ -138,14 +138,14 @@ public class AuthActivity extends AppCompatActivity {
     }
 
     new AuthorizationTask(
-      mSharePathEditText.getText().toString(),
-      username,
-      password,
-      mDomainEditText.getText().toString(),
-      mPinShareCheckbox.isChecked(),
-      mShareManager,
-      mClient,
-      callback).execute();
+        mSharePathEditText.getText().toString(),
+        username,
+        password,
+        mDomainEditText.getText().toString(),
+        mPinShareCheckbox.isChecked(),
+        mShareManager,
+        mClient,
+        callback).execute();
   }
 
   private void showMessage(@StringRes int id) {
@@ -155,11 +155,11 @@ public class AuthActivity extends AppCompatActivity {
   public static PendingIntent createAuthIntent(Context context, String shareUri) {
     Intent authIntent = new Intent();
     authIntent.setComponent(new ComponentName(
-            context.getPackageName(),
-            AuthActivity.class.getName()));
+        context.getPackageName(),
+        AuthActivity.class.getName()));
     authIntent.putExtra(SHARE_URI_KEY, shareUri);
 
     return PendingIntent.getActivity(
-            context, 0, authIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        context, 0, authIntent, PendingIntent.FLAG_UPDATE_CURRENT);
   }
 }
