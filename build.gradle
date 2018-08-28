@@ -2,10 +2,12 @@
 
 buildscript {
     repositories {
+	mavenLocal()
         jcenter()
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:2.3.3'
+        classpath 'com.diffplug.spotless:spotless-plugin-gradle:3.15.0-SNAPSHOT'
     }
 }
 
@@ -16,8 +18,15 @@ allprojects {
             url "https://maven.google.com"
         }
     }
+    apply plugin: 'com.diffplug.gradle.spotless'
 }
 
-task clean(type: Delete) {
+clean << {
     delete rootProject.buildDir
+}
+
+spotless {
+	groovyGradle {
+		greclipse().configFile('gradle/code-style/android-formatting.xml', 'gradle/code-style/groovy.prefs')
+	}
 }
