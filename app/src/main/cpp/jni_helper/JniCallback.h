@@ -28,29 +28,25 @@ template<typename T>
     JNIEnv * const env;
     const T &instance;
     JniContext (JNIEnv * const env, T &obj) :
-        env (env), instance (obj) {
-    }
+        env (env), instance (obj) {}
   };
 
 template<typename T, typename ... Us>
   class JniCallback : public SambaClient::Callback<Us...> {
   public:
-    JniCallback (const JniContext<T> &context, std::function<int
-    (JniContext<T>, Us...)> callback) :
-        context (context), callback (callback) {
-    }
+    JniCallback (const JniContext<T> &context,
+                 std::function<int (JniContext<T>, Us...)> callback) :
+        context (context), callback (callback) {}
 
     JniCallback (JniCallback &) = delete;
     JniCallback (JniCallback &&) = delete;
 
-    int
-    operator() (Us ... args) const {
+    int operator() (Us ... args) const {
       return callback (context, args...);
     }
   private:
     const JniContext<T> context;
-    const std::function<int
-    (JniContext<T>, Us...)> callback;
+    const std::function<int (JniContext<T>, Us...)> callback;
   };
 
 #endif //SAMBADOCUMENTSPROIVDER_JNICALLBACK_H

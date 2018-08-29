@@ -39,8 +39,8 @@ namespace SambaClient {
     LOGD (TAG, "Destroyed SambaClient.");
   }
 
-  bool
-  SambaClient::Init (const bool debug, const CredentialCache *credentialCache) {
+  bool SambaClient::Init (const bool debug,
+                          const CredentialCache *credentialCache) {
     LOGD (TAG,
           "Initializing SambaClient. Debug: %d CredentialCache: %x HOME: %s",
           debug, credentialCache, getenv ("HOME"));
@@ -77,11 +77,10 @@ namespace SambaClient {
     return true;
   }
 
-  void
-  SambaClient::GetAuthData (const char *server, const char *share,
-                            char *workgroup, int maxLenWorkgroup,
-                            char *username, int maxLenUsername, char *password,
-                            int maxLenPassword) {
+  void SambaClient::GetAuthData (const char *server, const char *share,
+                                 char *workgroup, int maxLenWorkgroup,
+                                 char *username, int maxLenUsername,
+                                 char *password, int maxLenPassword) {
 
     LOGV (TAG, "Requesting authentication data for server: %s and share: %s.",
           server, share);
@@ -135,8 +134,7 @@ namespace SambaClient {
       }
   }
 
-  int
-  SambaClient::OpenDir (const char *url) {
+  int SambaClient::OpenDir (const char *url) {
     LOGD (TAG, "Opening dir at %s.", url);
     const int fd = smbc_opendir (url);
     if (fd < 0)
@@ -149,8 +147,7 @@ namespace SambaClient {
     return fd;
   }
 
-  int
-  SambaClient::ReadDir (const int dh, const struct smbc_dirent ** dirent) {
+  int SambaClient::ReadDir (const int dh, const struct smbc_dirent ** dirent) {
     LOGD (TAG, "Reading dir for %x.", dh);
     *dirent = smbc_readdir (dh);
     if (*dirent == NULL)
@@ -166,8 +163,7 @@ namespace SambaClient {
     return 0;
   }
 
-  int
-  SambaClient::CloseDir (const int dh) {
+  int SambaClient::CloseDir (const int dh) {
     LOGD (TAG, "Close dir for %x.", dh);
     const int ret = smbc_closedir (dh);
 
@@ -181,8 +177,7 @@ namespace SambaClient {
     return 0;
   }
 
-  int
-  SambaClient::Fstat (const int fd, struct stat * const st) {
+  int SambaClient::Fstat (const int fd, struct stat * const st) {
     LOGD (TAG, "Getting stat for %x.", fd);
     int result = smbc_fstat (fd, st);
     if (result < 0)
@@ -195,8 +190,7 @@ namespace SambaClient {
     return 0;
   }
 
-  int
-  SambaClient::Stat (const char *url, struct stat * const st) {
+  int SambaClient::Stat (const char *url, struct stat * const st) {
     LOGD (TAG, "Getting stat for %s.", url);
     int result = smbc_stat (url, st);
     if (result < 0)
@@ -209,8 +203,7 @@ namespace SambaClient {
     return 0;
   }
 
-  int
-  SambaClient::CreateFile (const char *url) {
+  int SambaClient::CreateFile (const char *url) {
     LOGD (TAG, "Creating a file at %s.", url);
     int fd = smbc_creat (url, 0755);
     if (fd < 0)
@@ -227,8 +220,7 @@ namespace SambaClient {
     return 0;
   }
 
-  int
-  SambaClient::Mkdir (const char *url) {
+  int SambaClient::Mkdir (const char *url) {
     LOGD (TAG, "Making dir at %s.", url);
     int result = smbc_mkdir (url, 0755);
     if (result < 0)
@@ -241,8 +233,7 @@ namespace SambaClient {
     return result;
   }
 
-  int
-  SambaClient::Rename (const char *url, const char *nurl) {
+  int SambaClient::Rename (const char *url, const char *nurl) {
     LOGD (TAG, "Renaming %s to %s.", url, nurl);
     int result = smbc_rename (url, nurl);
     if (result < 0)
@@ -254,8 +245,7 @@ namespace SambaClient {
     return result;
   }
 
-  int
-  SambaClient::Unlink (const char *url) {
+  int SambaClient::Unlink (const char *url) {
     LOGD (TAG, "Unlinking %s.", url);
     int result = smbc_unlink (url);
     if (result < 0)
@@ -267,8 +257,7 @@ namespace SambaClient {
     return result;
   }
 
-  int
-  SambaClient::Rmdir (const char *url) {
+  int SambaClient::Rmdir (const char *url) {
     LOGD (TAG, "Removing dir at %s.", url);
     int result = smbc_rmdir (url);
     if (result < 0)
@@ -280,8 +269,8 @@ namespace SambaClient {
     return result;
   }
 
-  int
-  SambaClient::OpenFile (const char *url, const int flag, const mode_t mode) {
+  int SambaClient::OpenFile (const char *url, const int flag,
+                             const mode_t mode) {
     LOGD (TAG, "Opening file at %s with flag %x.", url, flag);
     int fd = smbc_open (url, flag, mode);
     if (fd < 0)
@@ -297,8 +286,8 @@ namespace SambaClient {
     return fd;
   }
 
-  off_t
-  SambaClient::SeekFile (const int fd, const off_t offset, const int whence) {
+  off_t SambaClient::SeekFile (const int fd, const off_t offset,
+                               const int whence) {
     LOGV (TAG, "Set offset to %x for file with fd %x", offset, fd);
 
     off_t result = smbc_lseek (fd, offset, whence);
@@ -312,8 +301,8 @@ namespace SambaClient {
     return result;
   }
 
-  ssize_t
-  SambaClient::ReadFile (const int fd, void *buffer, const size_t maxlen) {
+  ssize_t SambaClient::ReadFile (const int fd, void *buffer,
+                                 const size_t maxlen) {
     LOGV (TAG, "Reading max %lu bytes from file with fd %x", maxlen, fd);
     const ssize_t size = smbc_read (fd, buffer, maxlen);
     if (size < 0)
@@ -329,8 +318,8 @@ namespace SambaClient {
     return size;
   }
 
-  ssize_t
-  SambaClient::WriteFile (const int fd, void *buffer, const size_t length) {
+  ssize_t SambaClient::WriteFile (const int fd, void *buffer,
+                                  const size_t length) {
     LOGV (TAG, "Writing %lu bytes to file with fd %x.", length, fd);
     const ssize_t size = smbc_write (fd, buffer, length);
     if (size < 0)
@@ -346,8 +335,7 @@ namespace SambaClient {
     return size;
   }
 
-  int
-  SambaClient::CloseFile (const int fd) {
+  int SambaClient::CloseFile (const int fd) {
     LOGD (TAG, "Closing file with fd: %x", fd);
     int result = smbc_close (fd);
     if (result < 0)

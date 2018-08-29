@@ -35,8 +35,7 @@ namespace {
   SambaClient::JavaClassCache classCache_;
 }
 
-jlong
-Java_com_google_android_sambadocumentsprovider_nativefacade_NativeSambaFacade_nativeInit (
+jlong Java_com_google_android_sambadocumentsprovider_nativefacade_NativeSambaFacade_nativeInit (
     JNIEnv *env, jobject instance, jboolean debug, jlong cachePointer) {
   SambaClient::SambaClient *client = new SambaClient::SambaClient ();
 
@@ -56,8 +55,7 @@ Java_com_google_android_sambadocumentsprovider_nativefacade_NativeSambaFacade_na
     }
 }
 
-void
-Java_com_google_android_sambadocumentsprovider_nativefacade_NativeSambaFacade_nativeDestroy (
+void Java_com_google_android_sambadocumentsprovider_nativefacade_NativeSambaFacade_nativeDestroy (
     JNIEnv *env, jobject instance, jlong pointer) {
   SambaClient::SambaClient *client =
       reinterpret_cast<SambaClient::SambaClient *> (pointer);
@@ -65,8 +63,8 @@ Java_com_google_android_sambadocumentsprovider_nativefacade_NativeSambaFacade_na
   delete client;
 }
 
-static jobject
-create_directory_entry (JNIEnv* env, const struct smbc_dirent &ent) {
+static jobject create_directory_entry (JNIEnv* env,
+                                       const struct smbc_dirent &ent) {
   // Only initialize these variables once to avoid costly calls into JNIEnv.
   static const jclass dirEntryClass = classCache_.get (
       env, CLASS_PREFIX "/base/DirectoryEntry");
@@ -95,8 +93,8 @@ create_directory_entry (JNIEnv* env, const struct smbc_dirent &ent) {
   return entry;
 }
 
-static void
-throw_new_file_not_found_exception (JNIEnv *env, const char *fmt, ...) {
+static void throw_new_file_not_found_exception (JNIEnv *env, const char *fmt,
+                                                ...) {
   char message[256];
   va_list args;
   va_start (args, fmt);
@@ -108,8 +106,8 @@ throw_new_file_not_found_exception (JNIEnv *env, const char *fmt, ...) {
   env->ThrowNew (fileNotFoundExceptionClass, message);
 }
 
-static void
-throw_new_errno_exception (JNIEnv *env, const char *functionName_, int err) {
+static void throw_new_errno_exception (JNIEnv *env, const char *functionName_,
+                                       int err) {
   static const jclass errnoExceptionClass = classCache_.get (
       env, "android/system/ErrnoException");
   static const jmethodID errnoExceptionConstructor = env->GetMethodID (
@@ -129,8 +127,7 @@ throw_new_errno_exception (JNIEnv *env, const char *functionName_, int err) {
   env->Throw (errnoException);
 }
 
-static void
-throw_new_auth_failed_exception (JNIEnv* env) {
+static void throw_new_auth_failed_exception (JNIEnv* env) {
   static const jclass authFailedExceptionClass = classCache_.get (
       env, CLASS_PREFIX "/base/AuthFailedException");
   static const jmethodID authFailedExceptionConstructor = env->GetMethodID (
@@ -146,8 +143,7 @@ throw_new_auth_failed_exception (JNIEnv* env) {
   env->Throw (authFailedException);
 }
 
-jint
-Java_com_google_android_sambadocumentsprovider_nativefacade_NativeSambaFacade_openDir (
+jint Java_com_google_android_sambadocumentsprovider_nativefacade_NativeSambaFacade_openDir (
     JNIEnv *env, jobject instance, jlong pointer, jstring uri_) {
   const char *uri = env->GetStringUTFChars (uri_, 0);
   if (uri == NULL)
@@ -185,8 +181,7 @@ Java_com_google_android_sambadocumentsprovider_nativefacade_NativeSambaFacade_op
   return fd;
 }
 
-static jobject
-create_structstat (JNIEnv *env, const struct stat &st) {
+static jobject create_structstat (JNIEnv *env, const struct stat &st) {
   static const jclass structStatClass = classCache_.get (
       env, "android/system/StructStat");
   static const jmethodID structStatConstructor = env->GetMethodID (
@@ -208,8 +203,7 @@ create_structstat (JNIEnv *env, const struct stat &st) {
                          static_cast<jlong> (st.st_blocks));
 }
 
-jobject
-Java_com_google_android_sambadocumentsprovider_nativefacade_NativeSambaFacade_stat (
+jobject Java_com_google_android_sambadocumentsprovider_nativefacade_NativeSambaFacade_stat (
     JNIEnv *env, jobject instance, jlong pointer, jstring uri_) {
   const char *uri = env->GetStringUTFChars (uri_, 0);
   if (uri == NULL)
@@ -251,8 +245,7 @@ Java_com_google_android_sambadocumentsprovider_nativefacade_NativeSambaFacade_st
   return stat;
 }
 
-void
-Java_com_google_android_sambadocumentsprovider_nativefacade_NativeSambaFacade_createFile (
+void Java_com_google_android_sambadocumentsprovider_nativefacade_NativeSambaFacade_createFile (
     JNIEnv *env, jobject instance, jlong pointer, jstring uri_) {
   const char *uri = env->GetStringUTFChars (uri_, 0);
   if (uri == NULL)
@@ -286,8 +279,7 @@ Java_com_google_android_sambadocumentsprovider_nativefacade_NativeSambaFacade_cr
   env->ReleaseStringUTFChars (uri_, uri);
 }
 
-void
-Java_com_google_android_sambadocumentsprovider_nativefacade_NativeSambaFacade_mkdir (
+void Java_com_google_android_sambadocumentsprovider_nativefacade_NativeSambaFacade_mkdir (
     JNIEnv *env, jobject instance, jlong pointer, jstring uri_) {
   const char *uri = env->GetStringUTFChars (uri_, 0);
   if (uri == NULL)
@@ -322,8 +314,7 @@ Java_com_google_android_sambadocumentsprovider_nativefacade_NativeSambaFacade_mk
   env->ReleaseStringUTFChars (uri_, uri);
 }
 
-void
-Java_com_google_android_sambadocumentsprovider_nativefacade_NativeSambaFacade_rename (
+void Java_com_google_android_sambadocumentsprovider_nativefacade_NativeSambaFacade_rename (
     JNIEnv *env, jobject instance, jlong pointer, jstring uri_, jstring nuri_) {
   const char *uri = env->GetStringUTFChars (uri_, 0);
   if (uri == NULL)
@@ -364,8 +355,7 @@ Java_com_google_android_sambadocumentsprovider_nativefacade_NativeSambaFacade_re
   env->ReleaseStringUTFChars (uri_, uri);
 }
 
-void
-Java_com_google_android_sambadocumentsprovider_nativefacade_NativeSambaFacade_unlink (
+void Java_com_google_android_sambadocumentsprovider_nativefacade_NativeSambaFacade_unlink (
     JNIEnv *env, jobject instance, jlong pointer, jstring uri_) {
   const char *uri = env->GetStringUTFChars (uri_, 0);
   if (uri == NULL)
@@ -398,8 +388,7 @@ Java_com_google_android_sambadocumentsprovider_nativefacade_NativeSambaFacade_un
   env->ReleaseStringUTFChars (uri_, uri);
 }
 
-void
-Java_com_google_android_sambadocumentsprovider_nativefacade_NativeSambaFacade_rmdir (
+void Java_com_google_android_sambadocumentsprovider_nativefacade_NativeSambaFacade_rmdir (
     JNIEnv *env, jobject instance, jlong pointer, jstring uri_) {
   const char *uri = env->GetStringUTFChars (uri_, 0);
   if (uri == NULL)
@@ -432,8 +421,7 @@ Java_com_google_android_sambadocumentsprovider_nativefacade_NativeSambaFacade_rm
   env->ReleaseStringUTFChars (uri_, uri);
 }
 
-jint
-Java_com_google_android_sambadocumentsprovider_nativefacade_NativeSambaFacade_openFile (
+jint Java_com_google_android_sambadocumentsprovider_nativefacade_NativeSambaFacade_openFile (
     JNIEnv *env, jobject instance, jlong pointer, jstring uri_, jstring mode_) {
   int fd = -1;
 
@@ -510,8 +498,7 @@ Java_com_google_android_sambadocumentsprovider_nativefacade_NativeSambaFacade_op
   return fd;
 }
 
-jobject
-Java_com_google_android_sambadocumentsprovider_nativefacade_SambaDir_readDir (
+jobject Java_com_google_android_sambadocumentsprovider_nativefacade_SambaDir_readDir (
     JNIEnv *env, jobject instance, jlong pointer, jint dh) {
   SambaClient::SambaClient *client =
       reinterpret_cast<SambaClient::SambaClient*> (pointer);
@@ -534,8 +521,7 @@ Java_com_google_android_sambadocumentsprovider_nativefacade_SambaDir_readDir (
   return create_directory_entry (env, *dirent);
 }
 
-void
-Java_com_google_android_sambadocumentsprovider_nativefacade_SambaDir_close (
+void Java_com_google_android_sambadocumentsprovider_nativefacade_SambaDir_close (
     JNIEnv *env, jobject instance, jlong pointer, jint dh) {
   SambaClient::SambaClient *client =
       reinterpret_cast<SambaClient::SambaClient*> (pointer);
@@ -547,8 +533,7 @@ Java_com_google_android_sambadocumentsprovider_nativefacade_SambaDir_close (
     }
 }
 
-jobject
-Java_com_google_android_sambadocumentsprovider_nativefacade_SambaFile_fstat (
+jobject Java_com_google_android_sambadocumentsprovider_nativefacade_SambaFile_fstat (
     JNIEnv *env, jobject instance, jlong pointer, jint fd) {
   SambaClient::SambaClient *client =
       reinterpret_cast<SambaClient::SambaClient*> (pointer);
@@ -565,8 +550,7 @@ Java_com_google_android_sambadocumentsprovider_nativefacade_SambaFile_fstat (
   return create_structstat (env, st);
 }
 
-jlong
-Java_com_google_android_sambadocumentsprovider_nativefacade_SambaFile_seek (
+jlong Java_com_google_android_sambadocumentsprovider_nativefacade_SambaFile_seek (
     JNIEnv *env, jobject instance, jlong pointer, jint fd, jlong offset,
     jint whence) {
   SambaClient::SambaClient *client =
@@ -581,8 +565,7 @@ Java_com_google_android_sambadocumentsprovider_nativefacade_SambaFile_seek (
   return result;
 }
 
-jlong
-Java_com_google_android_sambadocumentsprovider_nativefacade_SambaFile_read (
+jlong Java_com_google_android_sambadocumentsprovider_nativefacade_SambaFile_read (
     JNIEnv *env, jobject instance, jlong pointer, jint fd, jobject buffer_,
     jint maxlen) {
   void *buffer = env->GetDirectBufferAddress (buffer_);
@@ -600,8 +583,7 @@ Java_com_google_android_sambadocumentsprovider_nativefacade_SambaFile_read (
   return size;
 }
 
-jlong
-Java_com_google_android_sambadocumentsprovider_nativefacade_SambaFile_write (
+jlong Java_com_google_android_sambadocumentsprovider_nativefacade_SambaFile_write (
     JNIEnv *env, jobject instance, jlong pointer, jint fd, jobject buffer_,
     jint length) {
   void *buffer = env->GetDirectBufferAddress (buffer_);
@@ -619,8 +601,7 @@ Java_com_google_android_sambadocumentsprovider_nativefacade_SambaFile_write (
   return size;
 }
 
-void
-Java_com_google_android_sambadocumentsprovider_nativefacade_SambaFile_close (
+void Java_com_google_android_sambadocumentsprovider_nativefacade_SambaFile_close (
     JNIEnv *env, jobject instance, jlong pointer, jint fd) {
   SambaClient::SambaClient *client =
       reinterpret_cast<SambaClient::SambaClient*> (pointer);
@@ -632,14 +613,12 @@ Java_com_google_android_sambadocumentsprovider_nativefacade_SambaFile_close (
     }
 }
 
-jlong
-Java_com_google_android_sambadocumentsprovider_nativefacade_NativeCredentialCache_nativeInit (
+jlong Java_com_google_android_sambadocumentsprovider_nativefacade_NativeCredentialCache_nativeInit (
     JNIEnv *env, jobject instance) {
   return reinterpret_cast<jlong> (new SambaClient::CredentialCache ());
 }
 
-void
-Java_com_google_android_sambadocumentsprovider_nativefacade_NativeCredentialCache_putCredential (
+void Java_com_google_android_sambadocumentsprovider_nativefacade_NativeCredentialCache_putCredential (
     JNIEnv *env, jobject instance, jlong pointer, jstring uri_,
     jstring workgroup_, jstring username_, jstring password_) {
 
@@ -683,8 +662,7 @@ Java_com_google_android_sambadocumentsprovider_nativefacade_NativeCredentialCach
   bail_workgroup: env->ReleaseStringUTFChars (uri_, uri);
 }
 
-void
-Java_com_google_android_sambadocumentsprovider_nativefacade_NativeCredentialCache_removeCredential (
+void Java_com_google_android_sambadocumentsprovider_nativefacade_NativeCredentialCache_removeCredential (
     JNIEnv *env, jobject instance, jlong pointer, jstring uri_) {
   const char *uri = env->GetStringUTFChars (uri_, 0);
   if (uri == NULL)
@@ -697,8 +675,7 @@ Java_com_google_android_sambadocumentsprovider_nativefacade_NativeCredentialCach
   cache->remove (uri);
 }
 
-void
-Java_com_google_android_sambadocumentsprovider_SambaConfiguration_setEnv (
+void Java_com_google_android_sambadocumentsprovider_SambaConfiguration_setEnv (
     JNIEnv *env, jobject instance, jstring var_, jstring value_) {
   const char *var = env->GetStringUTFChars (var_, 0);
   if (var == NULL)

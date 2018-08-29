@@ -18,8 +18,7 @@
 #include "JavaClassCache.h"
 
 namespace SambaClient {
-  jclass
-  JavaClassCache::get (JNIEnv *env, const char *name_) {
+  jclass JavaClassCache::get (JNIEnv *env, const char *name_) {
     std::string name (name_);
     jclass &value = cache_[name];
     if (value == NULL)

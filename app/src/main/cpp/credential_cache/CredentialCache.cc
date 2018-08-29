@@ -21,8 +21,7 @@ namespace SambaClient {
 
   struct CredentialTuple emptyTuple_;
 
-  struct CredentialTuple
-  CredentialCache::get (const std::string &key) const {
+  struct CredentialTuple CredentialCache::get (const std::string &key) const {
     if (credentialMap_.find (key) != credentialMap_.end ())
       {
         return credentialMap_.at (key);
@@ -33,13 +32,12 @@ namespace SambaClient {
       }
   }
 
-  void
-  CredentialCache::put (const char *key, const struct CredentialTuple &tuple) {
+  void CredentialCache::put (const char *key,
+                             const struct CredentialTuple &tuple) {
     credentialMap_[key] = tuple;
   }
 
-  void
-  CredentialCache::remove (const char *key_) {
+  void CredentialCache::remove (const char *key_) {
     std::string key (key_);
     credentialMap_.erase (key);
   }
