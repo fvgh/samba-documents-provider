@@ -54,6 +54,5 @@ spotless {
   cpp {
     licenseHeaderFile '../gradle/code-style/licenseHeader.txt'
     eclipse().configFile '../gradle/code-style/android-formatting-cpp.xml'
-    paddedCell()
   }
 }
